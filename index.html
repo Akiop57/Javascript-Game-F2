@@ -1,103 +1,193 @@
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Changa+One&display=swap"
-  rel="stylesheet"
-/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"> <!-- Pixel art font -->
+<title>Homepage</title>
+
 <style>
   body {
-    background-color: black;
-    font-family: 'Changa One', cursive;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #ffffff; /* White text color */
+      font-weight: bold; /* Set body text to bold */
+      position: relative; /* Position relative for the pseudo-element */
+      overflow: hidden; /* Prevent scrolling */
   }
-</style>
-
-<div style="position: relative; display: inline-block">
-  <canvas></canvas>
-  <div
-    id="gameOver"
-    style="
-      position: absolute;
+  .background {
+      background-image: url('bg.png'); /* Background image */
+      background-size: cover; /* Cover the entire background */
+      background-position: center; /* Center the background image */
+      position: fixed; /* Fix the background */
       top: 0;
-      bottom: 0;
       left: 0;
       right: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 72px;
-      color: white;
-      -webkit-text-stroke: 3px black;
-    "
-  >
-    GAME OVER
-  </div>
-  <div
-    style="
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 400px;
-      height: 80px;
-      background: linear-gradient(
-        to left bottom,
-        rgba(0, 0, 0, 0.8),
-        rgba(0, 0, 0, 0),
-        rgba(0, 0, 0, 0)
-      );
-    "
-  ></div>
-  <div
-    style="
-      position: absolute;
-      top: 4px;
-      right: 8px;
-      font-size: 36px;
-      color: white;
-      -webkit-text-stroke: 2px black;
-      display: flex;
-      align-items: center;
-    "
-  >
-    <!-- coins -->
-    <div style="display: flex; align-items: center; margin-right: 20px">
-      <svg
-        style="width: 25px; color: gold; margin-right: 5px"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 512 512"
-        fill="currentColor"
-      >
-        <!--! Font Awesome Pro 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. -->
-        <path
-          d="M512 80C512 98.01 497.7 114.6 473.6 128C444.5 144.1 401.2 155.5 351.3 158.9C347.7 157.2 343.9 155.5 340.1 153.9C300.6 137.4 248.2 128 192 128C183.7 128 175.6 128.2 167.5 128.6L166.4 128C142.3 114.6 128 98.01 128 80C128 35.82 213.1 0 320 0C426 0 512 35.82 512 80V80zM160.7 161.1C170.9 160.4 181.3 160 192 160C254.2 160 309.4 172.3 344.5 191.4C369.3 204.9 384 221.7 384 240C384 243.1 383.3 247.9 381.9 251.7C377.3 264.9 364.1 277 346.9 287.3C346.9 287.3 346.9 287.3 346.9 287.3C346.8 287.3 346.6 287.4 346.5 287.5L346.5 287.5C346.2 287.7 345.9 287.8 345.6 288C310.6 307.4 254.8 320 192 320C132.4 320 79.06 308.7 43.84 290.9C41.97 289.9 40.15 288.1 38.39 288C14.28 274.6 0 258 0 240C0 205.2 53.43 175.5 128 164.6C138.5 163 149.4 161.8 160.7 161.1L160.7 161.1zM391.9 186.6C420.2 182.2 446.1 175.2 468.1 166.1C484.4 159.3 499.5 150.9 512 140.6V176C512 195.3 495.5 213.1 468.2 226.9C453.5 234.3 435.8 240.5 415.8 245.3C415.9 243.6 416 241.8 416 240C416 218.1 405.4 200.1 391.9 186.6V186.6zM384 336C384 354 369.7 370.6 345.6 384C343.8 384.1 342 385.9 340.2 386.9C304.9 404.7 251.6 416 192 416C129.2 416 73.42 403.4 38.39 384C14.28 370.6 .0003 354 .0003 336V300.6C12.45 310.9 27.62 319.3 43.93 326.1C83.44 342.6 135.8 352 192 352C248.2 352 300.6 342.6 340.1 326.1C347.9 322.9 355.4 319.2 362.5 315.2C368.6 311.8 374.3 308 379.7 304C381.2 302.9 382.6 301.7 384 300.6L384 336zM416 278.1C434.1 273.1 452.5 268.6 468.1 262.1C484.4 255.3 499.5 246.9 512 236.6V272C512 282.5 507 293 497.1 302.9C480.8 319.2 452.1 332.6 415.8 341.3C415.9 339.6 416 337.8 416 336V278.1zM192 448C248.2 448 300.6 438.6 340.1 422.1C356.4 415.3 371.5 406.9 384 396.6V432C384 476.2 298 512 192 512C85.96 512 .0003 476.2 .0003 432V396.6C12.45 406.9 27.62 415.3 43.93 422.1C83.44 438.6 135.8 448 192 448z"
-        />
-      </svg>
+      bottom: 0;
+      filter: blur(8px); /* Apply blur effect */
+      z-index: -1; /* Send it to the back */
+      opacity: 0; /* Start invisible */
+      animation: fadeIn 1.7s forwards; /* Fade-in effect */
+      animation-delay: 0.5s; /* Delay for background fade-in */
+  }
 
-      <div id="coins">100</div>
-    </div>
-    <!-- hearts -->
-    <div style="display: flex; align-items: center">
-      <svg
-        style="width: 35px; color: red; margin-right: 5px"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 20 20"
-        fill="currentColor"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-          clip-rule="evenodd"
-        />
-      </svg>
-      <div id="hearts">10</div>
-    </div>
+  @keyframes fadeIn {
+      to {
+          opacity: 1; /* End at full opacity */
+      }
+  }
+  .navbar {
+      background-color: #000; /* Black background */
+      color: #fff; /* White text */
+      display: flex;
+      justify-content: center; /* Center the navbar items */
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 20px; /* Add space below the navbar */
+      font-weight: bold; /* Set navbar text to bold */
+      border: 6px solid #fff; /* White border */
+      border-radius: 5px; /* Optional: rounded corners */
+  }
+  .nav-container {
+      display: flex; /* Use flexbox for alignment */
+      gap: 50px; /* Space between links */
+  }
+  .navbar a {
+      color: #fff; /* White text */
+      text-decoration: none;
+      font-weight: bold; /* Set link text to bold */
+      padding: 10px; /* Added padding for better hover effect */
+      transition: color 0.3s ease, transform 0.3s ease; /* Smooth transition */
+  }
+  .navbar a:hover {
+      background-color: #444; /* Dark gray for hover */
+      transform: scale(1.1); /* Scale effect on hover */
+  }
+  .separator {
+      height: 20px; /* Adjust height as needed */
+      width: 2px; /* Line width */
+      background-color: #fff; /* White line */
+      margin: 0 10px; /* Spacing around the line */
+  }
+  .container {
+      display: flex;
+      justify-content: center; /* Center the container */
+      align-items: center; /* Center items vertically */
+      height: 100vh; /* Full viewport height */
+      opacity: 0; /* Start content invisible */
+      animation: contentFadeIn 1s forwards; /* Fade-in effect for content */
+      animation-delay: 1.5s; /* Delay for content fade-in */
+  }
+  @keyframes contentFadeIn {
+      to {
+          opacity: 1; /* End content at full opacity */
+      }
+  }
+  .sidebar {
+      width: 200px; /* Set sidebar width to 150px */
+      background-color: #000; /* Black background */
+      color: #fff; /* White text */
+      padding: 15px;
+      height: 100vh;
+      position: fixed;
+      left: -150px; /* Hide sidebar initially */
+      transition: left 0.3s ease;
+      font-weight: bold; /* Set sidebar text to bold */
+      border: 6px solid #fff; /* White border */
+      border-radius: 5px; /* Optional: rounded corners */
+  }
+  .sidebar a {
+      color: #fff; /* White text */
+      text-decoration: none;
+      display: block;
+      padding: 10px 0;
+      font-weight: bold; /* Set link text to bold */
+      transition: background-color 0.3s ease; /* Smooth transition */
+  }
+  .sidebar a:hover {
+      background-color: #444; /* Dark gray for hover */
+  }
+  .content {
+      flex-grow: 1;
+      padding: 20px;
+      text-align: center; /* Center the text */
+      font-weight: bold; /* Set content text to bold */
+  }
+  .hamburger {
+      cursor: pointer;
+      width: 50px; /* Set width for round button */
+      height: 50px; /* Set height for round button */
+      background-color: #000; /* Black background */
+      color: #fff; /* White text */
+      border: none;
+      border-radius: 50%; /* Make it round */
+      font-size: 20px;
+      position: fixed; /* Keep the button fixed */
+      top: 4px; /* Position at the top */
+      left: 10px; /* Position at the left */
+      z-index: 1000; /* Ensure it's above other elements */
+      display: flex; /* Center the icon */
+      justify-content: center; /* Center the icon */
+      align-items: center; /* Center the icon */
+      font-weight: bold; /* Set button text to bold */
+      border: 1px solid #fff; /* White border */
+      transition: transform 0.3s ease; /* Smooth transition */
+  }
+  .hamburger:hover {
+      background-color: #444; /* Dark gray for hover */
+      transform: scale(1.1); /* Scale effect on hover */
+  }
+  h1, h2 {
+      color: #fff; /* White text */
+      font-weight: bold; /* Set heading text to bold */
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Text shadow */
+  }
+  .pixel-art {
+      font-family: 'Press Start 2P', cursive; /* Use pixel art font */
+      font-size: 80px; /* Set font size to make it big */
+      text-align: center; /* Center the text */
+      margin: 40px 0; /* Increased space above and below the text */
+      color: #fff; /* White text */
+  }
+</style>
+<script>
+  function toggleSidebar() {
+      const sidebar = document.querySelector('.sidebar');
+      const content = document.querySelector('.content');
+      if (sidebar.style.left === '0px') {
+          sidebar.style.left = '-150px'; // Hide sidebar
+          content.style.marginLeft = '0'; // Adjust content
+      } else {
+          sidebar.style.left = '0px'; // Show sidebar
+          content.style.marginLeft = '150px'; // Adjust content
+      }
+  }
+</script>
+</head>
+<body>
+<div class="background"></div> <!-- Blurry background -->
+<button class="hamburger" onclick="toggleSidebar()">☰</button>
+<div class="navbar">
+  <div class="nav-container">
+      <div><a href="Homepage.html">Home</a></div>
+      <div class="separator"></div>
+      <div><a href="game.html">Game</a></div>
   </div>
 </div>
-
-<script src="js/placementTilesData.js"></script>
-<script src="js/waypoints.js"></script>
-<script src="js/classes/Sprite.js"></script>
-<script src="js/classes/Building.js"></script>
-<script src="js/classes/Enemy.js"></script>
-<script src="js/classes/PlacementTile.js"></script>
-<script src="js/classes/Projectile.js"></script>
-<script src="js/index.js"></script>
+<div class="container">
+  <div class="sidebar">
+      <h2>Menu</h2>
+     <a href="index.html">Home</a>
+      <a href="About.html">About</a>
+      <a href="Person 1.html">Programmer</a>
+      <a href="Person 2.html">Designer</a>
+  </div>
+  <div class="content">
+      <h1 class="pixel-art">SPACE DEFENSE</h1> <!-- Added pixel art text -->
+      <p>Aliens Incoming Spaceship Ready To Blast!</p>
+  </div>
+</div>
+</body>
+</html>
